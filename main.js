@@ -5,8 +5,30 @@
 // create a variable randomNum that creates a random number between 1 and 20
 // use it as your argument to invoke your compareToTen function
 
+let compareToTen = (num) => {
+  return new Promise((resolve, reject) => {
+    if(num >= 10){
+      resolve(num)
+    }
+    reject(num)
+  })
+}
+
+let randomNum = Math.floor(Math.random() * 20 + 1);
+
+compareToTen(randomNum)
+.then((num) => {
+  console.log(`${num} 20 is greater than or equal to 10, resolved!`)
+})
+.catch((num) => {
+  console.log(`${num} is less than 10, error!` )
+})
+
+console.log(randomNum)
+
 //2.
 // create a global variable called order. It will hold a string with whatever drink you want to order, for example, a 'Slurpy'
+let order = 'Slurpy'
 //create a promise called drink
 // inside your promise:
 // first log 'I'll be right back with your <order variable>'.
@@ -14,6 +36,24 @@
 // when order is orderCannotBeFilled is true, promise should reject after 2 seconds with a message,
 // 'Sorry we are all out of <whatever the order is>' (not hard coded order)
 // otherwise resolve the order after 4 seconds saying 'Server returns: 'Here is your <whatever the order is>'
+let drink = new Promise((resolve, reject => {
+  console.log(`I'll be right back with your ${order}`)
+  
+  let orderCannotBeFilled = false;
+  if(orderCannotBeFilled){
+    setTimeout(() => {
+      resolve(`Here is your ${order}`);
+    }, 4000)
+  }else{
+      setTimeout(() => {
+      reject(`Sorry we are all out of ${order}`);
+      }, 2000)
+  }
+})
+
+
+
+
 
 // Now consume the promise
 // When the order resolves, it should log 'Server Returns:' and the resolve message.
@@ -21,6 +61,13 @@
 
 // Test by changing the value of orderCannotBeFilled between true and false
 
+drink
+.then((messages) => {
+  console.log(messages)
+})
+.catch((messages) => {
+  console.log(messages)
+})
 // SAMPLE OUTPUT:
 // resolve out put should be
 // Server says: "I'll be right back with your Slurpy"
